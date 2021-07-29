@@ -1,0 +1,51 @@
+version: '3.4'
+services:
+  db:
+    image: bitnami/mysql:latest
+    stop_grace_period: 60s
+    volumes:
+      - "../.tt/data/sql:/docker-entrypoint-initdb.d:cached"
+    restart: "no"
+    user: root
+    ports:
+      - 3306
+    environment:
+      - ALLOW_EMPTY_PASSWORD=yes
+      - MYSQL_DATABASE=drupal
+      - MYSQL_USER=drupal
+      - MYSQL_PASSWORD=drupal
+      - MYSQL_ROOT_PASSWORD=root
+      - VIRTUAL_HOST=db.${PROJECT_NAME}.${PROJECT_VENDOR}.docker
+      - DNSDOCK_ALIAS=db.${PROJECT_NAME}.${PROJECT_VENDOR}.docker
+
+  app:
+    image: php:7.4.8-apache
+    build:
+      context: ../
+      dockerfile: .tt/config/docker/dockerfiles/Dockerfile.app
+    volumes:
+      - "../:/var/www/html:cached"
+      - "../.cache/composer:/var/www/.composer:cached"
+    restart: "no"
+    #user: "$DEV_UID:$DEV_GID"
+    depends_on:
+      - db
+    links:
+      - db:db
+    ports:
+      - 80
+    working_dir: /var/www/html
+    environment:
+      - OPCACHE_ENABLED=0
+      - DB_HOST=db
+      - DB_NAME=drupal
+      - DB_USER=drupal
+      - DB_PASS=drupal
+      - DRUPAL_PREPROCESS_CSS=0
+      - DRUPAL_PREPROCESS_JS=0
+      - VIRTUAL_PORT=80
+      - VIRTUAL_HOST=app.${PROJECT_NAME}.${PROJECT_VENDOR}.docker
+      - DNSDOCK_ALIAS=app.${PROJECT_NAME}.${PROJECT_VENDOR}.docker
+      - PHP_MEMORY_LIMIT=512M
+      - PHP_MAX_EXECUTION_TIME=360
+      - COMPOSER_MEMORY_LIMIT=-1
