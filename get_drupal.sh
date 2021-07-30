@@ -1,5 +1,9 @@
 #/bin/bash
 
-composer create-project drupal/recommended-project:9.2.1 /tmp/drupal-composer-tmp --no-interaction
-mv /tmp/drupal-composer-tmp/* .
-rm -Rf .git
+SCRIPTPATH="$( cd -- "$(dirname "$0")" >/dev/null 2>&1 ; pwd -P )"
+TMPPATH="/tmp/drupal-composer-tmp"
+
+composer create-project drupal/recommended-project:9.2.1 $TMPPATH --no-interaction
+cp -Rp /tmp/drupal-composer-tmp/* $SCRIPTPATH/
+rm -Rf $SCRIPTPATH/.git
+rm -Rf $TMPPATH
