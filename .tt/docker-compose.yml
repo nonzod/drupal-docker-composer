@@ -1,4 +1,4 @@
-version: '3.4'
+version: '3.8'
 services:
   db:
     image: bitnami/mysql:latest
@@ -33,14 +33,17 @@ services:
     links:
       - db:db
     ports:
-      - 80
+      - 8080:80
     working_dir: /var/www/html
     environment:
       - OPCACHE_ENABLED=0
+      - DB_SCHEMA=mysql
       - DB_HOST=db
       - DB_NAME=drupal
       - DB_USER=drupal
       - DB_PASS=drupal
+      - DB_PORT=3306
+      - DB_PREFIX=
       - DRUPAL_PREPROCESS_CSS=0
       - DRUPAL_PREPROCESS_JS=0
       - VIRTUAL_PORT=80
@@ -58,9 +61,8 @@ services:
     links:
       - db:db
     ports:
-      - 8080
+      - 8081:8080
     environment:
-      - VIRTUAL_PORT=8080
       - VIRTUAL_HOST=adminer.${PROJECT_NAME}.${PROJECT_VENDOR}.docker
       - DNSDOCK_ALIAS=adminer.${PROJECT_NAME}.${PROJECT_VENDOR}.docker
 
@@ -68,8 +70,7 @@ services:
   mail:
     image: mailhog/mailhog:latest
     ports:
-      - 8025
+      - 8082:8025
     environment:
-      - VIRTUAL_PORT=8025
       - VIRTUAL_HOST=mailhog.${PROJECT_NAME}.${PROJECT_VENDOR}.docker
       - DNSDOCK_ALIAS=mailhog.${PROJECT_NAME}.${PROJECT_VENDOR}.docker

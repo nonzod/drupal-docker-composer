@@ -7,3 +7,7 @@ composer create-project drupal/recommended-project:9.2.1 $TMPPATH --no-interacti
 cp -Rp /tmp/drupal-composer-tmp/* $SCRIPTPATH/
 rm -Rf $SCRIPTPATH/.git
 rm -Rf $TMPPATH
+
+# cp $SCRIPTPATH/.tt/config/drupal/docker/settings.local.php $SCRIPTPATH/web/sites/
+# cp $SCRIPTPATH/.tt/config/drupal/docker/services.local.yml $SCRIPTPATH/web/sites/
+# rm $SCRIPTPATH/web/sites/example.*
