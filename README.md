@@ -3,8 +3,11 @@
 Implementa docker su installazione Drupal via Composer
 
 * clone repository
+* Modifica variabile in `.tt/.env`
 * run `get_drupal.sh`
 * `cd .tt/ && docker-compose up -d --build`
+* `docker-compose exec app bash`
+* `./init.sh`
 
 ## Network
 
