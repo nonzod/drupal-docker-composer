@@ -4,7 +4,7 @@ services:
     image: bitnami/mysql:latest
     stop_grace_period: 60s
     volumes:
-      - "../.tt/data/sql:/docker-entrypoint-initdb.d:cached"
+      - "data/sql:/docker-entrypoint-initdb.d:cached"
     restart: "no"
     user: root
     ports:
@@ -22,7 +22,7 @@ services:
     image: php:7.4.8-apache
     build:
       context: ../
-      dockerfile: .tt/config/docker/dockerfiles/Dockerfile.app
+      dockerfile: config/docker/dockerfiles/Dockerfile.app
     volumes:
       - "../:/var/www/html:cached"
       - "../.cache/composer:/var/www/.composer:cached"
