@@ -21,7 +21,7 @@ composer require 'drupal/crop' 'drupal/image_widget_crop' 'drupal/metatag' 'drup
 composer require 'drupal/menu_position:^1.0@beta' 'drupal/menu_block' 'drupal/menu_link_attributes'
 composer require 'drupal/paragraphs' 'drupal/paragraphs_asymmetric_translation_widgets:^1.0@beta' 'drupal/swiftmailer'
 composer require 'drupal/twig_field_value' 'drupal/twig_tweak' 'drupal/imce' 'drupal/linkit:^6.0@beta' 'drupal/field_group'
-composer require 'drupal/webform' 'drupal/antibot' 'drupal/devel' 'drupal/pathauto' 'drupal/redirect' 'drupal/block_class'
+composer require 'drupal/webform' 'drupal/antibot' 'drupal/pathauto' 'drupal/redirect' 'drupal/block_class'
 composer require 'drupal/viewsreference' 'drupal/video_embed_field' 'drupal/block_field:^1.0@RC' 'drupal/google_tag'
 composer require 'cweagans/composer-patches' 'tourtoolsteam/ttf6_paragraphs:dev-master' 'drush/drush'
 
