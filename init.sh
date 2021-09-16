@@ -1,5 +1,6 @@
 #!/bin/bash
 source .tt/.env
+
 SCRIPTPATH="$( cd -- "$(dirname "$0")" >/dev/null 2>&1 ; pwd -P )"
 TMPPATH="/tmp/drupal-composer-tmp"
 
@@ -14,22 +15,26 @@ cp -Rp /tmp/drupal-composer-tmp/* $SCRIPTPATH/
 rm -Rf $SCRIPTPATH/.git
 rm -Rf $TMPPATH
 
+# cp $SCRIPTPATH/.tt/config/drupal/docker/settings.local.php $SCRIPTPATH/web/sites/
+# cp $SCRIPTPATH/.tt/config/drupal/docker/services.local.yml $SCRIPTPATH/web/sites/
+# rm $SCRIPTPATH/web/sites/example.*
+
 composer config repositories.ttf6_paragraphs vcs "https://tourtools@bitbucket.org/tourtoolsteam/ttf6_paragraphs.git"
 
-composer require 'drupal/adminimal_theme' 'drupal/adminimal_admin_toolbar' 'drupal/module_filter'
-composer require 'drupal/crop' 'drupal/image_widget_crop' 'drupal/metatag' 'drupal/simple_sitemap'
-composer require 'drupal/menu_position:^1.0@beta' 'drupal/menu_block' 'drupal/menu_link_attributes'
-composer require 'drupal/paragraphs' 'drupal/paragraphs_asymmetric_translation_widgets:^1.0@beta' 'drupal/swiftmailer'
-composer require 'drupal/twig_field_value' 'drupal/twig_tweak' 'drupal/imce' 'drupal/linkit:^6.0@beta' 'drupal/field_group'
-composer require 'drupal/webform' 'drupal/antibot' 'drupal/pathauto' 'drupal/redirect' 'drupal/block_class'
-composer require 'drupal/viewsreference' 'drupal/video_embed_field' 'drupal/block_field:^1.0@RC' 'drupal/google_tag'
-composer require 'cweagans/composer-patches' 'tourtoolsteam/ttf6_paragraphs:dev-master' 'drush/drush'
+composer require "drupal/adminimal_theme" "drupal/adminimal_admin_toolbar" "drupal/module_filter"
+composer require "drupal/crop" "drupal/image_widget_crop" "drupal/metatag" "drupal/simple_sitemap"
+composer require "drupal/menu_position:^1.0@beta" "drupal/menu_block" "drupal/menu_link_attributes"
+composer require "drupal/paragraphs" "drupal/paragraphs_asymmetric_translation_widgets:^1.0@beta" "drupal/swiftmailer"
+composer require "drupal/twig_field_value" "drupal/twig_tweak" "drupal/imce" "drupal/linkit:^6.0@beta" "drupal/field_group"
+composer require "drupal/webform" "drupal/antibot" "drupal/pathauto" "drupal/redirect" "drupal/block_class"
+composer require "drupal/viewsreference" "drupal/video_embed_field" "drupal/block_field:^1.0@RC" "drupal/google_tag"
+composer require "cweagans/composer-patches" "tourtoolsteam/ttf6_paragraphs:dev-master" "drush/drush"
 
-composer require --dev 'drupal/devel' 'behat/behat' 'drupal/drupal-extension' 'kint-php/kint'
+composer require --dev "drupal/devel" "behat/behat" "drupal/drupal-extension" "kint-php/kint"
 
 # Site install
 
-vendor/bin/drush site:install standard --db-url='mysql://drupal:drupal@db:3306/drupal' --account-name='admin' --account-mail='dev@tourtools.it' --site-mail='dev@tourtools.it' --account-pass='devel' --locale='it' --site-name='test' -y
+vendor/bin/drush site:install standard --db-url="mysql://drupal:drupal@db:3306/drupal" --account-name=$DRUPAL_ADMIN_USERNAME --account-mail=$DRUPAL_ADMIN_EMAIL --site-mail=$DRUPAL_SITE_NAME --account-pass=$DRUPAL_ADMIN_PASSWORD --locale=$DRUPAL_LOCALE --site-name=$DRUPAL_SITE_NAME -y
 
 # Abilito tramite drush i vari moduli
 echo -e "\n\n\n\n---------------------------------"
