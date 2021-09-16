@@ -27,6 +27,9 @@ Da usare per creazione, avvio, arresto, rimozione e validazione dello stack dock
 * `docker-compose config` verifica che le impostazione di ambiente e dello stack siano corrette e non ci siano errori all’interno del file docker-compose.yml
 * `docker-compose exec SERVICE_NAME bash` entra con il termianle bash al’interno del container dichiarato
 
+**attenzione** In caso di errore "max depth exceeded" fare riferimento a [questo post](https://stackoverflow.com/questions/47272611/docker-max-depth-exceeded).
+Al momento la solzione pare essere quella di rimuovere tutte le immagini collegate al dockerfile `docker rmi -f $(docker images -a -q)`
+
 ## Note
 
 Sono presenti esempi di `settings.local.php` e `services.local.yml` nella directory `.tt/config/drupal/docker`

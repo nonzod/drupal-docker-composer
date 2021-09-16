@@ -11,7 +11,7 @@ COPY .tt/config/docker/drush/drushrc.php /root/.drush/drushrc.php
 
 RUN set -eux
 RUN apt update -y
-RUN apt install -y git nodejs libldb-dev libpq-dev libxml2-dev zlib1g-dev libpng-dev libonig-dev
+RUN apt install -y git zip unzip nodejs libldb-dev libpq-dev libxml2-dev zlib1g-dev libpng-dev libonig-dev
 RUN rm -fr /var/lib/apt/lists/* /tmp/* /var/tmp/*
 RUN docker-php-ext-install -j5 gd mbstring mysqli pdo pdo_mysql shmop opcache
 RUN a2enmod rewrite
